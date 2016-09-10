@@ -3,6 +3,8 @@
 
 This is a shell script for setting up Laravel Production environment on Ubuntu 14.04 system.
 
+> [中文文档](https://phphub.org/topics/2814)
+
 ## Software list
 
 * Ubuntu 16.04
