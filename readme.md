@@ -9,7 +9,7 @@ This is a shell script for setting up Laravel Production environment on Ubuntu 1
 
 ## Software list
 
-* Ubuntu 16.04
+* Ubuntu 14.04
 * Git
 * PHP 7.0
 * Nginx
