@@ -1,9 +1,9 @@
 
-## 说明
+## Intro
 
-此脚本用于在一台全新的 Ubuntu 14.04 LTS 上部署适合 Laravel 使用的 LNMP 生产环境。
+This is a shell script for setting up Laravel Production environment on Ubuntu 14.04 system.
 
-## 软件信息
+## Software list
 
 * Ubuntu 16.04
 * Git
@@ -17,43 +17,43 @@
 * Memcached
 * Beanstalkd
 
-## 安装步骤
+## Installation
 
-1). 下载 `deploy.sh` 脚本
+1). Pull down the script
 
 ```
-$ wget https://raw.githubusercontent.com/summerblue/laravel-ubuntu-init/master/deploy.sh
-$ chmod +x deploy.sh
+wget https://raw.githubusercontent.com/summerblue/laravel-ubuntu-init/master/deploy.sh
+chmod +x deploy.sh
 ```
 
-2). 设置 MYSQL 密码
+2). Config MySQL password
 
-`vi deploy.sh` 根据情况修改以下：
+`vi deploy.sh` edit your password:
 
 ```
 # Configure
-MYSQL_ROOT_PASSWORD="这里填写复杂的密码"
+MYSQL_ROOT_PASSWORD="{{--Your Password--}}"
 MYSQL_NORMAL_USER="estuser"
-MYSQL_NORMAL_USER_PASSWORD="这里填写复杂的密码"
+MYSQL_NORMAL_USER_PASSWORD="{{--Your Password--}}"
 ```
 
-3). 开始安装
+3). Start install
 
-有需要的话可以使用网易镜像加速：
-
-```
-$ wget http://mirrors.163.com/.help/sources.list.trusty -O /etc/apt/sources.list
-```
-
-开始安装：
+For **Chinese** user, you may want to using a mirror for speed up:
 
 ```
-$ ./deploy.sh
+wget http://mirrors.163.com/.help/sources.list.trusty -O /etc/apt/sources.list
 ```
 
-> 注：请使用 root 运行。
+Run the shell script:
 
-安装后会有类似输出：
+```
+./deploy.sh
+```
+
+> Note: You must run as `root`.
+
+It will finish installation with this message:
 
 ```
 --
@@ -66,28 +66,28 @@ Mysql Normal User Password: xxx你的密码xxx
 --
 ```
 
-## 安装完以后的配置和注意事项
+## After installation
 
-### 1. 修改站点目录权限
+### 1. Web root permission
 
-通过此脚本配置的 Nginx 将使用 www 用户权限，因此需要在你的站点根目录下运行以下命令更新权限。
+Nginx using `www` user, in order to have a correct permission, you should change the owner of the directory:
 
 ```
-cd /data/www/{你的网站目录}
+cd /data/www/{YOU PROJECT FOLDER NAME}
 chown www:www -R ./
 ```
 
-### 2. 添加站点的 nginx 配置
+### 2. Add a site
 
-下面是站点的 nginx 配置模板，写入按照域名命名的文件中，并放入到 `/etc/nginx/sites-enabled` 目录下。
+Here is a Nginx config file template for Laravel Project, you should put it at `/etc/nginx/sites-enabled` folder.
 
-如：`/etc/nginx/sites-enabled/phphub.org`
+For example `/etc/nginx/sites-enabled/phphub.org`:
 
 ```
 server {
     listen 80;
-    server_name {你的域名};
-    root "{站点根目录}";
+    server_name {{---YOU-DOMAIN-NAME---}};
+    root "{{---YOU-PROJECT-FOLDER---}}";
 
     index index.html index.htm index.php;
 
@@ -100,8 +100,8 @@ server {
     location = /favicon.ico { access_log off; log_not_found off; }
     location = /robots.txt  { access_log off; log_not_found off; }
 
-    access_log /data/log/nginx/{你的网站标识}-access.log;
-    error_log  /data/log/nginx/{你的网站标识}-error.log error;
+    access_log /data/log/nginx/{{---YOU-PROJECT-NAME---}}-access.log;
+    error_log  /data/log/nginx/{{---YOU-PROJECT-NAME---}}-error.log error;
 
     sendfile off;
 
@@ -123,7 +123,7 @@ server {
 }
 ```
 
-配置完以后重启 nginx 即可。
+Restart Nginx when you done:
 
 ```
 service nginx restart
