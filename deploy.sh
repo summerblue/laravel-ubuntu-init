@@ -22,8 +22,10 @@ fi
 
 # Force Locale
 
+# locale-gen en_IE en_IE.UTF-8 en_US.UTF-8
+
 echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
-locale-gen en_US.UTF-8
+locale-gen en_IE en_IE.UTF-8 en_US.UTF-8
 
 # Add www user and group
 addgroup www
