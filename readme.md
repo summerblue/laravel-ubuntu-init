@@ -12,7 +12,7 @@
 * MySQL
 * Sqlite3
 * Composer
-* Node (With PM2, Bower, Grunt, and Gulp)
+* Node 6 (With PM2, Bower, Grunt, and Gulp)
 * Redis
 * Memcached
 * Beanstalkd
@@ -38,6 +38,14 @@ MYSQL_NORMAL_USER_PASSWORD="这里填写复杂的密码"
 ```
 
 3). 开始安装
+
+有需要的话可以使用网易镜像加速：
+
+```
+$ wget http://mirrors.163.com/.help/sources.list.trusty -O /etc/apt/sources.list
+```
+
+开始安装：
 
 ```
 $ ./deploy.sh

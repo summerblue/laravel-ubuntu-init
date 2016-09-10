@@ -22,10 +22,9 @@ fi
 
 # Force Locale
 
-# locale-gen en_IE en_IE.UTF-8 en_US.UTF-8
-
+export LC_ALL="en_US.UTF-8"
 echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
-locale-gen en_IE en_IE.UTF-8 en_US.UTF-8
+locale-gen en_US.UTF-8
 
 # Add www user and group
 addgroup www
@@ -51,7 +50,7 @@ apt-add-repository ppa:ondrej/php -y
 apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 5072E1F5
 sh -c 'echo "deb http://repo.mysql.com/apt/ubuntu/ trusty mysql-5.7" >> /etc/apt/sources.list.d/mysql.list'
 
-curl --silent --location https://deb.nodesource.com/setup_5.x | bash -
+curl --silent --location https://deb.nodesource.com/setup_6.x | bash -
 
 # Update Package Lists
 
@@ -161,9 +160,7 @@ apt-get install -y mysql-server --force-yes
 
 # Configure MySQL Password Lifetime
 
-echo "default_password_lifetime = 0" >> /etc/mysql/my.cnf
-
-sed -i '/^bind-address/s/bind-address.*=.*/bind-address = 0.0.0.0/' /etc/mysql/my.cnf
+echo "default_password_lifetime = 0" >> /etc/mysql/mysql.conf.d/mysqld.cnf
 
 mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "CREATE USER '${MYSQL_NORMAL_USER}'@'0.0.0.0' IDENTIFIED BY '${MYSQL_NORMAL_USER_PASSWORD}';"
 mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "GRANT ALL ON *.* TO '${MYSQL_NORMAL_USER}'@'127.0.0.1' IDENTIFIED BY '${MYSQL_NORMAL_USER_PASSWORD}' WITH GRANT OPTION;"
