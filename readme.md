@@ -1,4 +1,6 @@
 
+![group](https://cloud.githubusercontent.com/assets/324764/18408949/02d3cb2a-7770-11e6-96e2-54bbcfbfa1d1.png)
+
 ## Intro
 
 This is a shell script for setting up Laravel Production environment on Ubuntu 14.04 system.
