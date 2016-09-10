@@ -17,28 +17,46 @@
 * Memcached
 * Beanstalkd
 
-## 预计安装时间
-
-视网络情况而定，平均安装需要 15 分钟左右。
-
 ## 安装步骤
 
-1). 运行以下命令，生成 `deploy.sh` 脚本文件
+1). 下载 `deploy.sh` 脚本
 
 ```
-touch ~/deploy.sh
-chmod +x ~/deploy.sh
+$ wget https://raw.githubusercontent.com/summerblue/laravel-ubuntu-init/master/deploy.sh
+$ chmod +x deploy.sh
 ```
 
-<img src="http://7xrxcg.com1.z0.glb.clouddn.com/dc0b2cee0ff1abfe63465beb69067d10.png" width="600">
+2). 设置 MYSQL 密码
 
-2). 将 [服务器部署脚本](https://coding.net/u/estgroup/p/est-docs/git/blob/master/%E5%9B%A2%E9%98%9F%E6%96%87%E6%A1%A3/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC/deploy.sh) 里的内容复制到 `deploy.sh` 文件里，并修改 5 - 7 行的配置。
+`vi deploy.sh` 根据情况修改以下：
 
-![](media/14618913496721.jpg)
+```
+# Configure
+MYSQL_ROOT_PASSWORD="这里填写复杂的密码"
+MYSQL_NORMAL_USER="estuser"
+MYSQL_NORMAL_USER_PASSWORD="这里填写复杂的密码"
+```
 
-3). 直接运行 `~/deploy.sh` 文件, 会看到安装程序开始执行了
+3). 开始安装
 
-<img src="http://7xrxcg.com1.z0.glb.clouddn.com/d23db6f3040931d8c60c2b2b262bdc62.png">
+```
+$ ./deploy.sh
+```
+
+> 注：请使用 root 运行。
+
+安装后会有类似输出：
+
+```
+--
+--
+It's Done.
+Mysql Root Password: xxx你的密码xxx
+Mysql Normal User: estuser
+Mysql Normal User Password: xxx你的密码xxx
+--
+--
+```
 
 ## 安装完以后的配置和注意事项
 

@@ -20,6 +20,11 @@ if [[ "$MYSQL_NORMAL_USER_PASSWORD" == "" ]]; then
     exit 1;
 fi
 
+# Force Locale
+
+echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
+locale-gen en_US.UTF-8
+
 # Add www user and group
 addgroup www
 useradd -g www -d /home/www -c "www data" -m -s /usr/sbin/nologin www
@@ -31,11 +36,6 @@ apt-get update
 # Update System Packages
 
 apt-get -y upgrade
-
-# Force Locale
-
-echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
-locale-gen en_US.UTF-8
 
 # Install Some PPAs
 
