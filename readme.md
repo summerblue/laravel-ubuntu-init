@@ -9,7 +9,7 @@ This is a shell script for setting up Laravel Production environment on Ubuntu 1
 
 ## Software list
 
-* Ubuntu 14.04
+* Ubuntu 14.04 / [Ubuntu 16 请使用这个脚本](https://github.com/summerblue/laravel-ubuntu-init/blob/master/deploy-16.sh)
 * Git
 * PHP 7.0
 * Nginx
