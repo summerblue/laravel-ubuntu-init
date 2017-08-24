@@ -11,7 +11,7 @@
 
 ## Intro
 
-This is a shell script for setting up Laravel Production environment on Ubuntu 14.04 system.
+This is a shell script for setting up Laravel Production environment on Ubuntu 14.04 system （ [ for Ubuntu 16](https://github.com/summerblue/laravel-ubuntu-init/blob/master/deploy-16.sh) ).
 
 > [中文文档](https://phphub.org/topics/2814)
 
@@ -19,12 +19,12 @@ This is a shell script for setting up Laravel Production environment on Ubuntu 1
 
 * Ubuntu 14.04 / [Ubuntu 16 请使用这个脚本](https://github.com/summerblue/laravel-ubuntu-init/blob/master/deploy-16.sh)
 * Git
-* PHP 7.0
+* PHP 7.1
 * Nginx
 * MySQL
 * Sqlite3
 * Composer
-* Node 6 (With PM2, Bower, Grunt, and Gulp)
+* Node 6 (With Yarn, PM2, Bower, Grunt, and Gulp)
 * Redis
 * Memcached
 * Beanstalkd
@@ -50,12 +50,6 @@ MYSQL_NORMAL_USER_PASSWORD="{{--Your Password--}}"
 ```
 
 3). Start install
-
-For **Chinese** user, you may want to using a mirror for speed up:
-
-```
-wget http://mirrors.163.com/.help/sources.list.trusty -O /etc/apt/sources.list
-```
 
 Run the shell script:
 
@@ -127,7 +121,6 @@ server {
 
     location ~ \.php$ {
         fastcgi_pass   127.0.0.1:9000;
-        #fastcgi_pass /run/php/php7.0-fpm.sock;
         fastcgi_index  index.php;
         fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
         include        fastcgi_params;
