@@ -68,7 +68,7 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 # Install PHP Stuffs
 
-apt-get install -y --force-yes php7.1-cli php7.1 \
+apt-get install -y --force-yes php7.1-cli \
 php-pgsql php-sqlite3 php-gd php-apcu \
 php-curl php7.1-mcrypt \
 php-imap php-mysql php-memcached php7.1-readline php-xdebug \
