@@ -33,10 +33,20 @@ This is a shell script for setting up Laravel Production environment on Ubuntu 1
 
 1). Pull down the script
 
+My Ubuntu 16.04
+
+```
+wget https://raw.githubusercontent.com/summerblue/laravel-ubuntu-init/master/deploy-16.sh -O deploy.sh
+chmod +x deploy.sh
+```
+
+Ubuntu 14.04
+
 ```
 wget https://raw.githubusercontent.com/summerblue/laravel-ubuntu-init/master/deploy.sh
 chmod +x deploy.sh
 ```
+
 
 2). Config MySQL password
 
