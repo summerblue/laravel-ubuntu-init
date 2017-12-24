@@ -38,6 +38,9 @@ apt-get update
 
 apt-get -y upgrade
 
+# remove apache2
+apt-get purge apache2 -y
+
 # Install Some PPAs
 
 apt-get install -y software-properties-common curl
