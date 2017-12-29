@@ -94,6 +94,8 @@ sudo sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/7.1/cli/php.ini
 
 # Install Nginx & PHP-FPM
 
+# stop apach2 to prepare the port
+service apache2 stop
 apt-get install -y --force-yes nginx php7.1-fpm
 
 # Setup Some PHP-FPM Options
@@ -149,6 +151,8 @@ service php7.1-fpm restart
 # Install Node
 
 apt-get install -y nodejs
+# use the taobao npm registry
+/usr/bin/npm config set registry=http://registry.npm.taobao.org
 /usr/bin/npm install -g gulp
 /usr/bin/npm install -g bower
 
