@@ -69,10 +69,10 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 # Install PHP Stuffs
 
 apt-get install -y --force-yes php7.1-cli \
-php-pgsql php-sqlite3 php-gd php-apcu \
-php-curl php7.1-mcrypt \
-php-imap php-mysql php-memcached php7.1-readline php-xdebug \
-php-mbstring php-xml php7.1-zip php7.1-intl php7.1-bcmath php-soap
+php7.1-pgsql php7.1-sqlite3 php7.1-gd php7.1-apcu \
+php7.1-curl php7.1-mcrypt \
+php7.1-imap php7.1-mysql php7.1-memcached php7.1-readline php7.1-xdebug \
+php7.1-mbstring php7.1-xml php7.1-zip php7.1-intl php7.1-bcmath php7.1-soap
 
 # Install Composer
 
