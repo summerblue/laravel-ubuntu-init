@@ -6,9 +6,9 @@ export DEBIAN_FRONTEND=noninteractive
 [ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
 
 # Configure
-MYSQL_ROOT_PASSWORD=""
-MYSQL_NORMAL_USER="estuser"
-MYSQL_NORMAL_USER_PASSWORD=""
+MYSQL_ROOT_PASSWORD="deploi"
+MYSQL_NORMAL_USER="deploi"
+MYSQL_NORMAL_USER_PASSWORD="deploi"
 
 # Check if password is defined
 if [[ "$MYSQL_ROOT_PASSWORD" == "" ]]; then
@@ -26,9 +26,9 @@ export LC_ALL="en_US.UTF-8"
 echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
 locale-gen en_US.UTF-8
 
-# Add www user and group
-addgroup www
-useradd -g www -d /home/www -c "www data" -m -s /usr/sbin/nologin www
+# Add deploi user and group
+addgroup deploi
+useradd -g deploi -d /home/deploi -c "deploi data" -m -s /usr/sbin/nologin deploi
 
 # Update Package List
 
@@ -133,14 +133,14 @@ EOF
 
 # Set The Nginx & PHP-FPM User
 
-sed -i "s/user www-data;/user www;/" /etc/nginx/nginx.conf
+sed -i "s/user www-data;/user deploi;/" /etc/nginx/nginx.conf
 sed -i "s/# server_names_hash_bucket_size.*/server_names_hash_bucket_size 64;/" /etc/nginx/nginx.conf
 
-sed -i "s/user = www-data/user = www/" /etc/php/7.1/fpm/pool.d/www.conf
-sed -i "s/group = www-data/group = www/" /etc/php/7.1/fpm/pool.d/www.conf
+sed -i "s/user = www-data/user = deploi/" /etc/php/7.1/fpm/pool.d/www.conf
+sed -i "s/group = www-data/group = deploi/" /etc/php/7.1/fpm/pool.d/www.conf
 
-sed -i "s/listen\.owner.*/listen.owner = www/" /etc/php/7.1/fpm/pool.d/www.conf
-sed -i "s/listen\.group.*/listen.group = www/" /etc/php/7.1/fpm/pool.d/www.conf
+sed -i "s/listen\.owner.*/listen.owner = deploi/" /etc/php/7.1/fpm/pool.d/www.conf
+sed -i "s/listen\.group.*/listen.group = deploi/" /etc/php/7.1/fpm/pool.d/www.conf
 sed -i "s/;listen\.mode.*/listen.mode = 0666/" /etc/php/7.1/fpm/pool.d/www.conf
 
 service nginx restart
