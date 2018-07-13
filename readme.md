@@ -33,6 +33,13 @@ This is a shell script for setting up Laravel Production environment on Ubuntu 1
 
 1). Pull down the script
 
+Ubuntu 16.04 + PHP 7.2
+
+```
+wget https://raw.githubusercontent.com/summerblue/laravel-ubuntu-init/master/deploy-16-72.sh -O deploy.sh
+chmod +x deploy.sh
+```
+
 My Ubuntu 16.04
 
 ```
