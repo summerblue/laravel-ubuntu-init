@@ -62,8 +62,9 @@ apt-get update
 
 # Install Some Basic Packages
 
-apt-get install -y build-essential dos2unix gcc git libmcrypt4 libpcre3-dev \
-make python2.7-dev python-pip re2c supervisor unattended-upgrades whois vim libnotify-bin
+apt-get install -y build-essential dos2unix gcc git libmcrypt4 libpcre3-dev ntp unzip \
+make python2.7-dev python-pip re2c supervisor unattended-upgrades whois vim libnotify-bin \
+pv cifs-utils mcrypt bash-completion
 
 # Set My Timezone
 
@@ -71,11 +72,14 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 # Install PHP Stuffs
 
-apt-get install -y --force-yes php7.1-cli php7.1 \
-php-pgsql php-sqlite3 php-gd php-apcu \
-php-curl php7.1-mcrypt \
-php-imap php-mysql php-memcached php7.1-readline php-xdebug \
-php-mbstring php-xml php7.1-zip php7.1-intl php7.1-bcmath php-soap
+apt-get install -y --force-yes \
+php7.2-cli php7.2-dev \
+php7.2-pgsql php7.2-sqlite3 php7.2-gd \
+php7.2-curl php7.2-memcached \
+php7.2-imap php7.2-mysql php7.2-mbstring \
+php7.2-xml php7.2-zip php7.2-bcmath php7.2-soap \
+php7.2-intl php7.2-readline php7.2-ldap php-xdebug
+
 
 # Install Composer
 
@@ -87,25 +91,34 @@ printf "\nPATH=\"$(composer config -g home 2>/dev/null)/vendor/bin:\$PATH\"\n" |
 
 # Set Some PHP CLI Settings
 
-sudo sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.1/cli/php.ini
-sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.1/cli/php.ini
-sudo sed -i "s/memory_limit = .*/memory_limit = 512M/" /etc/php/7.1/cli/php.ini
-sudo sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/7.1/cli/php.ini
+sudo sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.2/cli/php.ini
+sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.2/cli/php.ini
+sudo sed -i "s/memory_limit = .*/memory_limit = 512M/" /etc/php/7.2/cli/php.ini
+sudo sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/7.2/cli/php.ini
 
 # Install Nginx & PHP-FPM
 
-apt-get install -y --force-yes nginx php7.1-fpm
+apt-get install -y --force-yes nginx php7.2-fpm
+
+rm /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-available/default
 
 # Setup Some PHP-FPM Options
 
-sed -i "s/error_reporting = .*/error_reporting = E_ALL \& ~E_NOTICE \& ~E_STRICT \& ~E_DEPRECATED/" /etc/php/7.1/fpm/php.ini
-sed -i "s/display_errors = .*/display_errors = Off/" /etc/php/7.1/fpm/php.ini
-sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/7.1/fpm/php.ini
-sed -i "s/memory_limit = .*/memory_limit = 512M/" /etc/php/7.1/fpm/php.ini
-sed -i "s/upload_max_filesize = .*/upload_max_filesize = 50M/" /etc/php/7.1/fpm/php.ini
-sed -i "s/post_max_size = .*/post_max_size = 50M/" /etc/php/7.1/fpm/php.ini
-sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/7.1/fpm/php.ini
-sed -i "s/listen =.*/listen = 127.0.0.1:9000/" /etc/php/7.1/fpm/pool.d/www.conf
+sed -i "s/error_reporting = .*/error_reporting = E_ALL \& ~E_NOTICE \& ~E_STRICT \& ~E_DEPRECATED/" /etc/php/7.2/fpm/php.ini
+sed -i "s/display_errors = .*/display_errors = Off/" /etc/php/7.2/fpm/php.ini
+sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/7.2/fpm/php.ini
+sed -i "s/memory_limit = .*/memory_limit = 512M/" /etc/php/7.2/fpm/php.ini
+sed -i "s/upload_max_filesize = .*/upload_max_filesize = 50M/" /etc/php/7.2/fpm/php.ini
+sed -i "s/post_max_size = .*/post_max_size = 50M/" /etc/php/7.2/fpm/php.ini
+sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/7.2/fpm/php.ini
+sed -i "s/listen =.*/listen = 127.0.0.1:9000/" /etc/php/7.2/fpm/pool.d/www.conf
+
+printf "[openssl]\n" | tee -a /etc/php/7.2/fpm/php.ini
+printf "openssl.cainfo = /etc/ssl/certs/ca-certificates.crt\n" | tee -a /etc/php/7.2/fpm/php.ini
+
+printf "[curl]\n" | tee -a /etc/php/7.2/fpm/php.ini
+printf "curl.cainfo = /etc/ssl/certs/ca-certificates.crt\n" | tee -a /etc/php/7.2/fpm/php.ini
 
 # Setup Some fastcgi_params Options
 
@@ -136,15 +149,15 @@ EOF
 sed -i "s/user www-data;/user www;/" /etc/nginx/nginx.conf
 sed -i "s/# server_names_hash_bucket_size.*/server_names_hash_bucket_size 64;/" /etc/nginx/nginx.conf
 
-sed -i "s/user = www-data/user = www/" /etc/php/7.1/fpm/pool.d/www.conf
-sed -i "s/group = www-data/group = www/" /etc/php/7.1/fpm/pool.d/www.conf
+sed -i "s/user = www-data/user = www/" /etc/php/7.2/fpm/pool.d/www.conf
+sed -i "s/group = www-data/group = www/" /etc/php/7.2/fpm/pool.d/www.conf
 
-sed -i "s/listen\.owner.*/listen.owner = www/" /etc/php/7.1/fpm/pool.d/www.conf
-sed -i "s/listen\.group.*/listen.group = www/" /etc/php/7.1/fpm/pool.d/www.conf
-sed -i "s/;listen\.mode.*/listen.mode = 0666/" /etc/php/7.1/fpm/pool.d/www.conf
+sed -i "s/listen\.owner.*/listen.owner = www/" /etc/php/7.2/fpm/pool.d/www.conf
+sed -i "s/listen\.group.*/listen.group = www/" /etc/php/7.2/fpm/pool.d/www.conf
+sed -i "s/;listen\.mode.*/listen.mode = 0666/" /etc/php/7.2/fpm/pool.d/www.conf
 
 service nginx restart
-service php7.1-fpm restart
+service php7.2-fpm restart
 
 # Install Node
 

@@ -148,6 +148,7 @@ service php7.1-fpm restart
 # Install Node
 
 apt-get install -y nodejs
+/usr/bin/npm config set registry=http://registry.npm.taobao.org
 /usr/bin/npm install -g gulp
 /usr/bin/npm install -g bower
 
