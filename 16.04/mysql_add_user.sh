@@ -30,6 +30,7 @@ mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "CREATE USER '${MYSQL
 if [[ CREATE_DB -eq 1 ]]; then
     mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "CREATE DATABASE ${MYSQL_NORMAL_USER};" > /dev/null 2>&1
     mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "GRANT ALL ON ${MYSQL_NORMAL_USER}.* TO '${MYSQL_NORMAL_USER}'@'127.0.0.1' IDENTIFIED BY '${MYSQL_NORMAL_USER_PASSWORD}';" > /dev/null 2>&1
+    mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "GRANT ALL ON ${MYSQL_NORMAL_USER}.* TO '${MYSQL_NORMAL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_NORMAL_USER_PASSWORD}';" > /dev/null 2>&1
     mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "FLUSH PRIVILEGES;" > /dev/null 2>&1
 fi
 
