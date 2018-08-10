@@ -8,12 +8,10 @@ source ${CURRENT_DIR}/../common/spinner.sh
 
 read -r -p "请输入 Mysql root 密码：" MYSQL_ROOT_PASSWORD
 
-mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e"quit" > /dev/null 2>&1
-
-if [[ $? -ne 0 ]]; then
+mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "quit" > /dev/null 2>&1 || {
     ansi -n --bg-red "密码不正确"
     exit 1
-fi
+}
 
 read -r -p "请输入要新建的用户名：" MYSQL_NORMAL_USER
 

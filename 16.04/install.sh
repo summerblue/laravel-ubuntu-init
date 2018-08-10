@@ -17,6 +17,7 @@ function init_system {
     export LC_ALL="en_US.UTF-8"
     echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
     locale-gen en_US.UTF-8
+    locale-gen zh_CN.UTF-8
 
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
@@ -27,11 +28,15 @@ function init_system {
 function init_repositories {
     add-apt-repository -y ppa:ondrej/php
     add-apt-repository -y ppa:nginx/stable
+    grep -rl ppa.launchpad.net /etc/apt/sources.list.d/ | xargs sed -i 's/ppa.launchpad.net/launchpad.proxy.ustclug.org/g'
+
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
-    curl -sL https://deb.nodesource.com/setup_8.x | bash -
-    sed -i "s/https:\/\/deb.nodesource.com\/node_8.x/https:\/\/mirrors.tuna.tsinghua.edu.cn\/nodesource\/deb_8.x/g" /etc/apt/sources.list.d/nodesource.list
-    grep -rl ppa.launchpad.net /etc/apt/sources.list.d/ | xargs sed -i 's/ppa.launchpad.net/launchpad.proxy.ustclug.org/g'
+
+    curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
+    echo 'deb https://mirrors.tuna.tsinghua.edu.cn/nodesource/deb_8.x xenial main' > /etc/apt/sources.list.d/nodesource.list
+    echo 'deb-src https://mirrors.tuna.tsinghua.edu.cn/nodesource/deb_8.x xenial main' >> /etc/apt/sources.list.d/nodesource.list
+
     apt-get update
 }
 

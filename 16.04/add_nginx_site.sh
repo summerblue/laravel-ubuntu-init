@@ -18,6 +18,11 @@ domains=$1
 project=$2
 project_dir="/var/www/${project}"
 
+[[ $date =~ ^[a-zA-Z\d_\-\.]$ ]] || {
+    ansi -n --bg-red "项目名包含非法字符"
+    exit 1
+}
+
 ansi -n --green "域名列表：${domains}"
 ansi -n --green "项目名：${project}"
 ansi -n --green "项目目录：${project_dir}"
@@ -33,8 +38,10 @@ case "$response" in
 esac
 
 cat ${CURRENT_DIR}/nginx_site_conf.tpl |
-    sed "s/{{domains}}/${domains}/g" |
-    sed "s/{{project}}/${project}/g" |
-    sed "s/{{project_dir}}/${project_dir}/g" > /etc/nginx/sites-available/${project}.conf
+    sed "s|{{domains}}|${domains}|g" |
+    sed "s|{{project}}|${project}|g" |
+    sed "s|{{project_dir}}|${project_dir}|g" > /etc/nginx/sites-available/${project}.conf
 
 ln -sf /etc/nginx/sites-available/${project}.conf /etc/nginx/sites-enabled/${project}.conf
+
+systemctl restart nginx.service
