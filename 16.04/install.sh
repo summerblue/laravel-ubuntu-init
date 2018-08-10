@@ -20,8 +20,8 @@ function init_system {
 
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-    apt update
-    apt install -y software-properties-common
+    apt-get update
+    apt-get install -y software-properties-common
 }
 
 function init_repositories {
@@ -30,7 +30,9 @@ function init_repositories {
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
     curl -sL https://deb.nodesource.com/setup_8.x | bash -
-    apt update
+    sed -i "s/https:\/\/deb.nodesource.com\/node_8.x/https:\/\/mirrors.tuna.tsinghua.edu.cn\/nodesource\/deb_8.x/g" /etc/apt/sources.list.d/nodesource.list
+    grep -rl ppa.launchpad.net /etc/apt/sources.list.d/ | xargs sed -i 's/ppa.launchpad.net/launchpad.proxy.ustclug.org/g'
+    apt-get update
 }
 
 function install_basic_softwares {
@@ -39,7 +41,7 @@ function install_basic_softwares {
 
 function install_node_yarn {
     apt-get install -y nodejs yarn
-    sudo -H -u ${WWW_USER} yarn config set registry https://registry.npm.taobao.org
+    sudo -H -u ${WWW_USER} sh -c 'yarn config set registry https://registry.npm.taobao.org'
 }
 
 function install_php {
@@ -57,7 +59,7 @@ function install_composer {
     curl -sS https://getcomposer.org/installer | php
     mv composer.phar /usr/local/bin/composer
     chmod +x /usr/local/bin/composer
-    sudo -H -u ${WWW_USER} composer config -g repo.packagist composer https://packagist.laravel-china.org
+    sudo -H -u ${WWW_USER} sh -c 'composer config -g repo.packagist composer https://packagist.laravel-china.org'
 }
 
 spinner_function init_system "===> 正在初始化系统" ${LOG_PATH}
