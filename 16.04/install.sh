@@ -41,7 +41,7 @@ function install_basic_softwares {
 
 function install_node_yarn {
     apt-get install -y nodejs yarn
-    sudo -H -u ${WWW_USER} sh -c 'yarn config set registry https://registry.npm.taobao.org'
+    sudo -H -u ${WWW_USER} sh -c 'cd ~ && yarn config set registry https://registry.npm.taobao.org'
 }
 
 function install_php {
@@ -56,10 +56,9 @@ function install_nmr {
 }
 
 function install_composer {
-    curl -sS https://getcomposer.org/installer | php
-    mv composer.phar /usr/local/bin/composer
+    wget https://dl.laravel-china.org/composer.phar -O /usr/local/bin/composer
     chmod +x /usr/local/bin/composer
-    sudo -H -u ${WWW_USER} sh -c 'composer config -g repo.packagist composer https://packagist.laravel-china.org'
+    sudo -H -u ${WWW_USER} sh -c 'cd ~ && composer config -g repo.packagist composer https://packagist.laravel-china.org'
 }
 
 spinner_function init_system "===> 正在初始化系统" ${LOG_PATH}

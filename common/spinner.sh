@@ -36,11 +36,9 @@ function _spinner() {
 
     case $1 in
         start)
-            # calculate the column where spinner and status msg will be displayed
-            let column=$(tput cols)-${#2}-8
             # display message and position the cursor in $column column
             echo -ne ${2}
-            printf "%${column}s"
+            printf "%4s"
 
             # start spinner
             i=1
