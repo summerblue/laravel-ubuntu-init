@@ -65,5 +65,10 @@ cd ~/laravel-ubuntu-init && ./16.04/mysql_add_user.sh
 
 创建完毕之后会将新用户的密码输出到屏幕上，请妥善保存。
 
+### 3. 以 www-data 身份执行命令
 
+本项目提供了一个 `sudowww` 的 `alias`，当需要以 `www-data` 用户身份执行命令时（如 `git clone 项目`、`php artisan config:cache` 等），可以直接在命令前加上 `sudowww`，同时在原命令两端加上单引号，如：
 
+```
+sudowww 'php artisan config:cache'
+```
