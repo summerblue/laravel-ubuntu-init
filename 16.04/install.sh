@@ -4,7 +4,7 @@ set -e
 CURRENT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 source ${CURRENT_DIR}/../common/common.sh
 
-[ $(id -u) != "0" ] && { ansi -n --bg-red "请用 root 账户执行本脚本"; exit 1; }
+[ $(id -u) != "0" ] && { ansi -n --bold --bg-red "请用 root 账户执行本脚本"; exit 1; }
 
 MYSQL_ROOT_PASSWORD=`random_string`
 
@@ -79,5 +79,6 @@ spinner_function install_others "===> 正在安装 Mysql / Nginx / Redis / Memca
 spinner_function install_node_yarn "===> 正在安装 Nodejs / Yarn" ${LOG_PATH}
 spinner_function install_composer "===> 正在安装 Composer" ${LOG_PATH}
 
-ansi --green -n "安装完毕"
-ansi --green "Mysql root 密码："; ansi -n --bg-yellow --black ${MYSQL_ROOT_PASSWORD}
+ansi --green --bold -n "安装完毕"
+ansi --green --bold "Mysql root 密码："; ansi -n --bold --bg-yellow --black ${MYSQL_ROOT_PASSWORD}
+ansi --green --bold -n "请手动执行 source ~/.bash_aliases 使 alias 指令生效。"
