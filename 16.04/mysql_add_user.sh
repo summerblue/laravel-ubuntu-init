@@ -2,9 +2,7 @@
 set -e
 
 CURRENT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-source ${CURRENT_DIR}/../common/helpers.sh
-source ${CURRENT_DIR}/../common/ansi.sh
-source ${CURRENT_DIR}/../common/spinner.sh
+source ${CURRENT_DIR}/../common/common.sh
 
 read -r -p "请输入 Mysql root 密码：" MYSQL_ROOT_PASSWORD
 

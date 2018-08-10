@@ -2,9 +2,7 @@
 set -e
 
 CURRENT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-source ${CURRENT_DIR}/../common/helpers.sh
-source ${CURRENT_DIR}/../common/ansi.sh
-source ${CURRENT_DIR}/../common/spinner.sh
+source ${CURRENT_DIR}/../common/common.sh
 
 [ $(id -u) != "0" ] && { ansi -n --bg-red "请用 root 账户执行本脚本"; exit 1; }
 
@@ -39,5 +37,7 @@ cat ${CURRENT_DIR}/nginx_site_conf.tpl |
     sed "s|{{project_dir}}|${project_dir}|g" > /etc/nginx/sites-available/${project}.conf
 
 ln -sf /etc/nginx/sites-available/${project}.conf /etc/nginx/sites-enabled/${project}.conf
+
+mkdir -p ${project_dir} && chown -R ${WWW_USER}.${WWW_USER_GROUP} ${project_dir}
 
 systemctl restart nginx.service
