@@ -32,7 +32,7 @@
 1). 下载安装脚本
 
 ```
-wget -qO- https://raw.githubusercontent.com/summerblue/laravel-ubuntu-init/download.sh | bash -
+wget -qO- https://raw.githubusercontent.com/summerblue/laravel-ubuntu-init/download.sh - | bash
 ```
 
 此脚本会将安装脚本下载到当前用户的 Home 目录下的 laravel-ubuntu-init 目录。

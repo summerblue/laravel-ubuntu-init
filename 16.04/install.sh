@@ -53,7 +53,6 @@ function install_others {
     debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${MYSQL_ROOT_PASSWORD}"
     apt-get install -y nginx mysql-server redis-server memcached beanstalkd sqlite3
     chown -R ${WWW_USER}.${WWW_USER_GROUP} /var/www/
-    rm -f /etc/nginx/sites-enabled/default
     systemctl restart nginx.service
 }
 
