@@ -12,15 +12,14 @@ green="\e[1;32m"
 nc="\e[0m"
 
 echo -e "${green}===> 开始下载...${nc}"
-apt-get update > /dev/null 2>&1
-apt-get install -y unzip > /dev/null 2>&1
 cd $HOME
-wget -q https://github.com/summerblue/laravel-ubuntu-init/archive/16.04.zip -O laravel-ubuntu-init.zip
+wget -q https://github.com/summerblue/laravel-ubuntu-init/archive/master.tar.gz -O laravel-ubuntu-init.tar.gz
 rm -rf laravel-ubuntu-init
-unzip -q laravel-ubuntu-init.zip -d laravel-ubuntu-init
-rm -f laravel-ubuntu-init.zip
+tar zxf laravel-ubuntu-init.tar.gz
+mv laravel-ubuntu-init-master laravel-ubuntu-init
+rm -f laravel-ubuntu-init.tar.gz
 echo -e "${green}===> 下载完毕${nc}"
 echo ""
-echo -e "${green}安装脚本位于${HOME}/laravel-ubuntu-init${nc}"
-cd -
+echo -e "${green}安装脚本位于 ${HOME}/laravel-ubuntu-init${nc}"
+cd - > /dev/null
 } # this ensures the entire script is downloaded #
