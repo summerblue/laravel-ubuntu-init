@@ -27,15 +27,15 @@ case "$response" in
         ;;
 esac
 
-mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "CREATE USER '${MYSQL_NORMAL_USER}'@'127.0.0.1' IDENTIFIED BY '${MYSQL_NORMAL_USER_PASSWORD}';"
+mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "CREATE USER '${MYSQL_NORMAL_USER}'@'127.0.0.1' IDENTIFIED BY '${MYSQL_NORMAL_USER_PASSWORD}';" > /dev/null 2>&1
 
 if [[ CREATE_DB -eq 1 ]]; then
-    mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "CREATE DATAVASE ${MYSQL_NORMAL_USER};"
-    mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "GRANT ALL ON ${MYSQL_NORMAL_USER}.* TO '${MYSQL_NORMAL_USER}'@'127.0.0.1' IDENTIFIED BY '${MYSQL_NORMAL_USER_PASSWORD}';"
-    mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "FLUSH PRIVILEGES;"
+    mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "CREATE DATABASE ${MYSQL_NORMAL_USER};" > /dev/null 2>&1
+    mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "GRANT ALL ON ${MYSQL_NORMAL_USER}.* TO '${MYSQL_NORMAL_USER}'@'127.0.0.1' IDENTIFIED BY '${MYSQL_NORMAL_USER_PASSWORD}';" > /dev/null 2>&1
+    mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "FLUSH PRIVILEGES;" > /dev/null 2>&1
 fi
 
 ansi -n --green "创建成功";
 
-ansi --green "用户名："; ansi -n --bg-red ${MYSQL_NORMAL_USER}
-ansi --green "密码："; ansi -n --bg-red ${MYSQL_NORMAL_USER_PASSWORD}
+ansi --green "用户名："; ansi -n --bg-yellow --black ${MYSQL_NORMAL_USER}
+ansi --green "密码："; ansi -n --bg-yellow --black ${MYSQL_NORMAL_USER_PASSWORD}

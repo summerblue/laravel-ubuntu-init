@@ -8,20 +8,16 @@ source ${CURRENT_DIR}/../common/spinner.sh
 
 [ $(id -u) != "0" ] && { ansi -n --bg-red "请用 root 账户执行本脚本"; exit 1; }
 
-[ $# -lt 2 ] && { 
-    ansi -n --green "命令格式：./add_nginx_site.sh {域名} {项目名}"
-    ansi -n --green "多个域名用空格隔开，并且需在两端加上双引号，如：./add_nginx_site.sh \"leo108.com www.leo108.com\" leo108"
-    exit 1
-}
+read -r -p "请输入项目名：" project
 
-domains=$1
-project=$2
-project_dir="/var/www/${project}"
-
-[[ $date =~ ^[a-zA-Z\d_\-\.]$ ]] || {
+[[ $project =~ ^[a-zA-Z\0-9_\-\.]+$ ]] || {
     ansi -n --bg-red "项目名包含非法字符"
     exit 1
 }
+
+read -r -p "请输入站点域名（多个域名用空格隔开）：" domains
+
+project_dir="/var/www/${project}"
 
 ansi -n --green "域名列表：${domains}"
 ansi -n --green "项目名：${project}"
