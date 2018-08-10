@@ -8,8 +8,8 @@ lsb_release -d | grep 'Ubuntu' >& /dev/null
 DISTRO=$(lsb_release -c -s)
 [[ ${DISTRO} -ne "xenial" ]] && { echo "仅支持 Ubuntu 16.04 系统"; exit 1; }
 
-local green="\e[1;32m"
-local nc="\e[0m"
+green="\e[1;32m"
+nc="\e[0m"
 
 echo -e "${green}===> 开始下载...${nc}"
 apt-get update > /dev/null 2>&1
