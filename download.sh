@@ -21,5 +21,11 @@ rm -f laravel-ubuntu-init.tar.gz
 echo -e "${green}===> 下载完毕${nc}"
 echo ""
 echo -e "${green}安装脚本位于： ${HOME}/laravel-ubuntu-init${nc}"
+
+[ $(id -u) != "0" ] && {
+    source ${HOME}/laravel-ubuntu-init/common/ansi.sh
+    ansi -n --bg-yellow "发现当前账户并非 root，请用 root 账户执行安装脚本"
+}
+
 cd - > /dev/null
 } # this ensures the entire script is downloaded #

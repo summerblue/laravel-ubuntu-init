@@ -13,6 +13,8 @@
 
 适用于 Ubuntu 16.04 的 LNMP 安装脚本，并设置了国内镜像加速。
 
+请确保所有命令都以 root 账户执行，如果登录账户不是 root，则需要执行 `sudo -H -s` 切换为 root 账户后再下载安装。
+
 ## 软件列表
 
 * Git
@@ -35,7 +37,7 @@
 wget -qO- https://raw.githubusercontent.com/summerblue/laravel-ubuntu-init/master/download.sh - | bash
 ```
 
-此脚本会将安装脚本下载到当前用户的 Home 目录下的 laravel-ubuntu-init 目录。
+此脚本会将安装脚本下载到当前用户的 Home 目录下的 `laravel-ubuntu-init` 目录。
 
 2). 执行安装
 

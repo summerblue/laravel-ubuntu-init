@@ -25,7 +25,6 @@ function init_system {
 function init_alias {
     alias sudowww > /dev/null 2>&1 || {
         echo "alias sudowww='sudo -H -u ${WWW_USER} sh -c'" >> ~/.bash_aliases
-        source ~/.bash_aliases
     }
 }
 
@@ -50,7 +49,7 @@ function install_basic_softwares {
 
 function install_node_yarn {
     apt-get install -y nodejs yarn
-    sudowww 'cd ~ && yarn config set registry https://registry.npm.taobao.org'
+    sudo -H -u ${WWW_USER} sh -c 'cd ~ && yarn config set registry https://registry.npm.taobao.org'
 }
 
 function install_php {
@@ -69,7 +68,7 @@ function install_others {
 function install_composer {
     wget https://dl.laravel-china.org/composer.phar -O /usr/local/bin/composer
     chmod +x /usr/local/bin/composer
-    sudowww 'cd ~ && composer config -g repo.packagist composer https://packagist.laravel-china.org'
+    sudo -H -u ${WWW_USER} sh -c  'cd ~ && composer config -g repo.packagist composer https://packagist.laravel-china.org'
 }
 
 spinner_function init_system "===> 正在初始化系统" ${LOG_PATH}
