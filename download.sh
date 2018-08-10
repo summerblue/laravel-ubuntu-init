@@ -20,6 +20,6 @@ mv laravel-ubuntu-init-master laravel-ubuntu-init
 rm -f laravel-ubuntu-init.tar.gz
 echo -e "${green}===> 下载完毕${nc}"
 echo ""
-echo -e "${green}安装脚本位于 ${HOME}/laravel-ubuntu-init${nc}"
+echo -e "${green}安装脚本位于： ${HOME}/laravel-ubuntu-init${nc}"
 cd - > /dev/null
 } # this ensures the entire script is downloaded #

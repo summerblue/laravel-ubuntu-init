@@ -72,13 +72,3 @@ spinner_function install_composer "===> 正在安装 Composer" ${LOG_PATH}
 
 ansi --green -n "安装完毕"
 ansi --green "Mysql root 密码："; ansi -n --bg-yellow --black ${MYSQL_ROOT_PASSWORD}
-
-if [ -f /etc/nginx/sites-enabled/default ]; then
-    read -r -p "是否删除默认 Nginx 站点？ [y/N] " response
-    case "$response" in
-        [yY][eE][sS]|[yY])
-            rm -f /etc/nginx/sites-enabled/default
-            systemctl restart nginx.service
-            ;;
-    esac
-fi
