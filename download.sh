@@ -9,7 +9,7 @@ DISTRO=$(lsb_release -c -s)
 apt-get update > /dev/null 2>&1
 apt-get install -y unzip > /dev/null 2>&1
 cd ~
-wget https://github.com/summerblue/laravel-ubuntu-init/archive/16.04.zip -O laravel-ubuntu-init.zip
+wget -q https://github.com/summerblue/laravel-ubuntu-init/archive/16.04.zip -O laravel-ubuntu-init.zip
 unzip -q laravel-ubuntu-init.zip
 rm -f laravel-ubuntu-init.zip
 echo "下载完毕"
