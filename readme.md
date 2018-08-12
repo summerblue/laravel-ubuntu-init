@@ -33,7 +33,7 @@
 
 以下软件需手动执行安装脚本：
 
-* Elasticsearch：`cd ~/laravel-ubuntu-init && ./16.04/install_elasticsearch.sh`
+* Elasticsearch：`./16.04/install_elasticsearch.sh`
 
 ## 安装步骤
 
@@ -41,7 +41,7 @@
 wget -qO- https://raw.githubusercontent.com/summerblue/laravel-ubuntu-init/master/download.sh - | bash
 ```
 
-此脚本会将安装脚本下载到当前用户的 Home 目录下的 `laravel-ubuntu-init` 目录并执行安装脚本，在安装结束之后会在屏幕上输出 Mysql root 账号的密码，请妥善保存。
+此脚本会将安装脚本下载到当前用户的 Home 目录下的 `laravel-ubuntu-init` 目录并自动执行安装脚本，在安装结束之后会在屏幕上输出 Mysql root 账号的密码，请妥善保存。
 
 如果当前不是 root 账户则不会自动安装，需要切换到 root 账户后执行 `./16.04/install.sh`。
 
@@ -50,7 +50,7 @@ wget -qO- https://raw.githubusercontent.com/summerblue/laravel-ubuntu-init/maste
 ### 1. 新增 Nginx 站点
 
 ```
-cd ~/laravel-ubuntu-init && ./16.04/nginx_add_site.sh
+./16.04/nginx_add_site.sh
 ```
 
 会提示输入站点名称（只能是英文、数字、`-` 和 `_`）、域名（多个域名用空格隔开），确认无误后会创建对应的 Nginx 配置并重启 Nginx。
@@ -58,7 +58,7 @@ cd ~/laravel-ubuntu-init && ./16.04/nginx_add_site.sh
 ### 2. 新增 Mysql 用户、数据库
 
 ```
-cd ~/laravel-ubuntu-init && ./16.04/mysql_add_user.sh
+./16.04/mysql_add_user.sh
 ```
 
 会提示输入 root 密码，如果错误将无法继续。输入需要创建的 Mysql 用户名，以及确认是否需要创建对应用户名的数据库。
