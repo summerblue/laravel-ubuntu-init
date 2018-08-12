@@ -29,23 +29,21 @@
 * Beanstalkd
 * Memcached
 
-## 安装步骤
+## 可选软件列表
 
-1). 下载安装脚本
+以下软件需手动执行安装脚本：
+
+* Elasticsearch：`cd ~/laravel-ubuntu-init && ./16.04/install_elasticsearch.sh`
+
+## 安装步骤
 
 ```
 wget -qO- https://raw.githubusercontent.com/summerblue/laravel-ubuntu-init/master/download.sh - | bash
 ```
 
-此脚本会将安装脚本下载到当前用户的 Home 目录下的 `laravel-ubuntu-init` 目录。
+此脚本会将安装脚本下载到当前用户的 Home 目录下的 `laravel-ubuntu-init` 目录并执行安装脚本，在安装结束之后会在屏幕上输出 Mysql root 账号的密码，请妥善保存。
 
-2). 执行安装
-
-```
-cd ~/laravel-ubuntu-init && ./16.04/install.sh
-```
-
-在安装结束之后会在屏幕上输出 Mysql root 账号的密码，请妥善保存。
+如果当前不是 root 账户则不会自动安装，需要切换到 root 账户后执行 `./16.04/install.sh`。
 
 ## 日常使用
 
