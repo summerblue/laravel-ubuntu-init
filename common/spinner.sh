@@ -94,6 +94,6 @@ function spinner_function {
     desc=$2
     log_file=$3
     start_spinner "${desc}"
-    $func > ${log_file} 2>&1
+    $func >> ${log_file} 2>&1
     stop_spinner $?
 }
