@@ -31,6 +31,11 @@ esac
 
 mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "CREATE USER '${MYSQL_NORMAL_USER}' IDENTIFIED BY '${MYSQL_NORMAL_USER_PASSWORD}';" >> ${LOG_PATH} 2>&1
 
+ansi -n --bold --green "用户创建成功";
+
+ansi --green --bold "用户名："; ansi -n --bg-yellow --black ${MYSQL_NORMAL_USER}
+ansi --green --bold "密码："; ansi -n --bg-yellow --black ${MYSQL_NORMAL_USER_PASSWORD}
+
 if [[ CREATE_DB -eq 1 ]]; then
     DATABASE_NAME=${MYSQL_NORMAL_USER/\-/_}
     mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "CREATE DATABASE ${DATABASE_NAME};" >> ${LOG_PATH} 2>&1
@@ -38,7 +43,4 @@ if [[ CREATE_DB -eq 1 ]]; then
     mysql --user="root" --password="${MYSQL_ROOT_PASSWORD}" -e "FLUSH PRIVILEGES;" >> ${LOG_PATH} 2>&1
 fi
 
-ansi -n --bold --green "创建成功";
-
-ansi --green --bold "用户名："; ansi -n --bg-yellow --black ${MYSQL_NORMAL_USER}
-ansi --green --bold "密码："; ansi -n --bg-yellow --black ${MYSQL_NORMAL_USER_PASSWORD}
+ansi -n --bold --green "数据库 ${DATABASE_NAME} 创建成功";
