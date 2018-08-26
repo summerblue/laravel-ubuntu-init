@@ -17,6 +17,7 @@ function install_es {
     echo "deb https://mirrors.tuna.tsinghua.edu.cn/elasticstack/6.x/apt stable main" > /etc/apt/sources.list.d/elastic-6.x.list
     apt-get update
     apt-get install -y elasticsearch
+    systemctl enable elasticsearch.service
 }
 
 function install_es_plugins {
