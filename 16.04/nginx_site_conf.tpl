@@ -26,7 +26,8 @@ server {
         fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
         fastcgi_index index.php;
         include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
 
         fastcgi_intercept_errors off;
         fastcgi_buffer_size 16k;
