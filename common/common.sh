@@ -1,7 +1,6 @@
 #!/bin/bash
 
 COMMON_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-source ${COMMON_DIR}/helpers.sh
 source ${COMMON_DIR}/ansi.sh
 
 export LOG_PATH=/var/log/laravel-ubuntu-init.log
@@ -17,9 +16,14 @@ function call_function {
     ret=$?
     echo -n '    ['
     if [[ $ret -eq 0 ]]; then
-        ansi --green "DONE"
+        ansi --bold --green "DONE"
     else
-        ansi --red "DONE"
+        ansi --bold --red "DONE"
     fi
     echo ']'
+}
+
+random_string(){
+    length=${1:-32}
+    echo `cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${length} | head -n 1`
 }
