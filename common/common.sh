@@ -18,7 +18,7 @@ function call_function {
     if [[ $ret -eq 0 ]]; then
         ansi --bold --green "DONE"
     else
-        ansi --bold --red "DONE"
+        ansi --bold --red "ERROR"
     fi
     echo ']'
 }
