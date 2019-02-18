@@ -1,5 +1,4 @@
-#!/bin/bash
-set -e
+#!/bin/bash -euo pipefail
 
 CURRENT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 source ${CURRENT_DIR}/../common/common.sh

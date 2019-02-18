@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/bin/bash -euo pipefail
 
 { # this ensures the entire script is downloaded #
 
-lsb_release -d | grep 'Ubuntu' >& /dev/null
-[[ $? -ne 0 ]] && { echo "仅支持 Ubuntu 16.04 系统"; exit 1; }
+unsupported_system() { echo "仅支持 Ubuntu 16.04 系统"; exit 1; }
 
-DISTRO=$(lsb_release -c -s)
-[[ ${DISTRO} -ne "xenial" ]] && { echo "仅支持 Ubuntu 16.04 系统"; exit 1; }
+lsb_release -d | grep 'Ubuntu' >& /dev/null || unsupported_system
+
+[[ "$(lsb_release -c -s)" == "xenial" ]] || unsupported_system
 
 green="\e[1;32m"
 nc="\e[0m"
@@ -26,8 +26,9 @@ echo -e "${green}安装脚本位于： ${HOME}/laravel-ubuntu-init${nc}"
     source ${HOME}/laravel-ubuntu-init/common/ansi.sh
     ansi -n --bold --bg-yellow --black "当前账户并非 root，请用 root 账户执行安装脚本（使用命令：sudo -H -s 切换为 root）"
 } || {
-    bash ./laravel-ubuntu-init/16.04/install.sh
+    ./laravel-ubuntu-init/16.04/install.sh
 }
 
 cd - > /dev/null
+
 } # this ensures the entire script is downloaded #
