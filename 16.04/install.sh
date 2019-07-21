@@ -66,7 +66,7 @@ function install_others {
 }
 
 function install_composer {
-    wget https://dl.laravel-china.org/composer.phar -O /usr/local/bin/composer
+    curl https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
     chmod +x /usr/local/bin/composer
     sudo -H -u ${WWW_USER} sh -c  'cd ~ && composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/'
 }
