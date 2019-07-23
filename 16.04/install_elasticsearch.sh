@@ -5,6 +5,13 @@ source ${CURRENT_DIR}/../common/common.sh
 
 [ $(id -u) != "0" ] && { ansi -n --bold --bg-red "请用 root 账户执行本脚本"; exit 1; }
 
+# 设置 JAVA_HOME
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/lib/jvm/java-8-openjdk-amd64/db/bin:/usr/lib/jvm/java-8-openjdk-amd64/jre/bin"
+J2SDKDIR="/usr/lib/jvm/java-8-openjdk-amd64"
+J2REDIR="/usr/lib/jvm/java-8-openjdk-amd64/jre*"
+JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+DERBY_HOME="/usr/lib/jvm/java-8-openjdk-amd64/db"
+
 function install_java {
     apt-get install -y openjdk-8-jre
 }
