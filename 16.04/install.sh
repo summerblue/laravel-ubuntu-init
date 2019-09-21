@@ -53,7 +53,7 @@ function install_node_yarn {
 }
 
 function install_php {
-    apt-get install -y php7.2-bcmath php7.2-cli php7.2-curl php7.2-fpm php7.2-gd php7.2-mbstring php7.2-mysql php7.2-opcache php7.2-pgsql php7.2-readline php7.2-xml php7.2-zip php7.2-sqlite3
+    apt-get install -y php7.3-bcmath php7.3-cli php7.3-curl php7.3-fpm php7.3-gd php7.3-mbstring php7.3-mysql php7.3-opcache php7.3-pgsql php7.3-readline php7.3-xml php7.3-zip php7.3-sqlite3
 }
 
 function install_others {

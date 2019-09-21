@@ -10,7 +10,7 @@
 ## 软件列表
 
 * Git
-* PHP 7.2
+* PHP 7.3
 * Nginx
 * MySQL
 * Sqlite3
