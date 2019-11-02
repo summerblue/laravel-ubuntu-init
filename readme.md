@@ -25,7 +25,7 @@
 
 以下软件需手动执行安装脚本：
 
-* Elasticsearch：`./16.04/install_elasticsearch.sh`
+* Elasticsearch：`./16.04/install_elasticsearch.sh`，默认为 6.x，如果要安装 7.x 则执行 `./16.04/install_elasticsearch.sh 7`
 
 ## 安装步骤
 
