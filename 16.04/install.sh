@@ -37,8 +37,8 @@ function init_repositories {
     echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
 
     curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
-    echo 'deb https://mirrors.tuna.tsinghua.edu.cn/nodesource/deb_8.x xenial main' > /etc/apt/sources.list.d/nodesource.list
-    echo 'deb-src https://mirrors.tuna.tsinghua.edu.cn/nodesource/deb_8.x xenial main' >> /etc/apt/sources.list.d/nodesource.list
+    echo 'deb https://mirrors.tuna.tsinghua.edu.cn/nodesource/deb_10.x xenial main' > /etc/apt/sources.list.d/nodesource.list
+    echo 'deb-src https://mirrors.tuna.tsinghua.edu.cn/nodesource/deb_10.x xenial main' >> /etc/apt/sources.list.d/nodesource.list
 
     apt-get update
 }
@@ -53,7 +53,7 @@ function install_node_yarn {
 }
 
 function install_php {
-    apt-get install -y php7.3-bcmath php7.3-cli php7.3-curl php7.3-fpm php7.3-gd php7.3-mbstring php7.3-mysql php7.3-opcache php7.3-pgsql php7.3-readline php7.3-xml php7.3-zip php7.3-sqlite3 php7.3-redis
+    apt-get install -y php7.4-bcmath php7.4-cli php7.4-curl php7.4-fpm php7.4-gd php7.4-mbstring php7.4-mysql php7.4-opcache php7.4-pgsql php7.4-readline php7.4-xml php7.4-zip php7.4-sqlite3 php7.4-redis
 }
 
 function install_others {
