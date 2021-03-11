@@ -36,9 +36,11 @@ function init_repositories {
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
 
+    # https://mirrors.tuna.tsinghua.edu.cn/  2021-02-05移除 nodesource 镜像
+
     curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
-    echo 'deb https://mirrors.tuna.tsinghua.edu.cn/nodesource/deb_10.x xenial main' > /etc/apt/sources.list.d/nodesource.list
-    echo 'deb-src https://mirrors.tuna.tsinghua.edu.cn/nodesource/deb_10.x xenial main' >> /etc/apt/sources.list.d/nodesource.list
+    echo 'deb https://deb.nodesource.com/node_10.x xenial main' > /etc/apt/sources.list.d/nodesource.list
+    echo 'deb-src https://deb.nodesource.com/node_10.x xenial main' >> /etc/apt/sources.list.d/nodesource.list
 
     apt-get update
 }
