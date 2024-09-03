@@ -30,7 +30,7 @@ function init_alias {
 
 function init_repositories {
     add-apt-repository -y ppa:ondrej/php
-    add-apt-repository -y ppa:nginx/stable
+    add-apt-repository -y ppa:ondrej/nginx-mainline
     grep -rl ppa.launchpad.net /etc/apt/sources.list.d/ | xargs sed -i 's/http:\/\/ppa.launchpad.net/https:\/\/launchpad.proxy.ustclug.org/g'
 
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -55,7 +55,7 @@ function install_node_yarn {
 }
 
 function install_php {
-    apt-get install -y php8.2-bcmath php8.2-cli php8.2-curl php8.2-fpm php8.2-gd php8.2-mbstring php8.2-mysql php8.2-opcache php8.2-pgsql php8.2-readline php8.2-xml php8.2-zip php8.2-sqlite3 php8.2-redis
+    apt-get install -y php8.2-bcmath php8.2-cli php8.2-curl php8.2-fpm php8.2-gd php8.2-mbstring php8.2-mysql php8.2-opcache php8.2-pgsql php8.2-readline php8.2-xml php8.2-zip php8.2-sqlite3 php8.2-redis php8.2-imagick
 }
 
 function install_others {
